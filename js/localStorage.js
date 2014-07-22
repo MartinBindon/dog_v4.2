@@ -164,6 +164,16 @@ function createPet() {
 		// in localStorage
 		console.log(restoredPet.pet_name);
 
+		// to add a new pet to the JSON string, the JSON string needs to be parsed, then the new array pushed in, then stringified again.
+		// Therefore:
+		// if JSON string exists
+		//      parse string
+		//      push new array in
+		//      stringify
+
+		// else
+		//      stringify
+
 	/*
 	// create array and add selected pet
 
