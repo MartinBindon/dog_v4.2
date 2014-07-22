@@ -1,52 +1,24 @@
 // Global variables
 
-
-	// var tbPets = localStorage.getItem("pet");  // create tbPets variable and attempt to retrieve any data from it
-	
-
-// if tbPets does not exist create an array to populate
-	//if (tbPets == null) {
-	//	tbPets = [];
-	//}
-
-	var petName;
-	var pet;
+var petName;
+var pet;
 
 function initialize() {
 
-	if (pet != null) {
+		var pets = JSON.parse(localStorage.getItem('petCollection'));
 
-		// if tbPets contains data, we extract the numer of pets and create a button containing 
-		// the pet name that links to a page for that pet containing a summary of all its information.
+		console.log('The full contents of pets in localStorage is: ' + pets);
 
-			// for each key pair with key 'pet_name' and value != null
-			// create a button. Add the petName as the content for that button.
 
-		//tbPets = JSON.parse(tbPets); // convert data to object
-
-		//var pet = tbPets;
-
-		var pets = JSON.parse(localStorage.getItem('pet'));
-		
-		//var petName;
-
-		console.log('The full contents of tbPets are: ' + pets);
-
-		pet.forEach(function(pet_name) {
-			if (pet.pet_name != null || null);
-			console.log(pet);
-			console.log(pet_name);
-		});
-
-		if(pets != null)
+		if(localStorage.petCollection != null)
 			{
 		// First element is always empty values, so i is set to 1 to prevent creating empty buttons.
-		for(i = 0; i < pets.length; i++) 
+		for(i = 0; i < petCollection.length; i++) 
 			{
 				
 				// remove each element of the array - this contains all information about one pet.
-				var currentPet = pets.slice(i);
-				petName = pets.pet_name;
+				//var currentPet = pets.slice(i);
+				//petName = pets.pet_name;
 				
 				
 				//console.log('The current pet should be:' + currentPet);
@@ -72,16 +44,16 @@ function initialize() {
 
 
 
-		// get pet names from localStorage
+		// ***** TO DO : get pet names from localStorage *****
 
-		// create a button for each name
+		// ***** create a button for each name
 
-		// link those buttons to the summary page
-		// only need one summary page, just need to extract the right information from localStorage
-		// for that pet.
-		}
+		// ***** link those buttons to the summary page
+		// ***** only need one summary page, just need to extract the right information from localStorage
+		// ***** for that pet.
 
-	// else we only show the add pet button.
+
+		// ***** else we only show the add pet button.
 	}
 
 // +++++++++++++++   This function collects data from the text +++++++++++++++
@@ -119,19 +91,22 @@ function getPet()
 	{
 		console.log("getPet called.");
 
-		for (var i in pet) {
-			console.log(pet[i]);  // this is returning each character of the string
-			var allpet = JSON.parse(pet[i]);  // getting an unexpected end error
-			console.log(allpet.pet_name);
-		}
+		//for (var i in pet) {
+		//	console.log(pet[i]);  // this is returning each character of the string
+		//	var allpet = JSON.parse(pet[i]);  // getting an unexpected end error
+		//	console.log(allpet.pet_name);
+		//}
 
 	}
 
 // Adds a pet to the JSON array, creates array if no array exists (first time it is clicked)
 function createPet() {
 
+	//collect any data already held in localStorage 
+	var pets = JSON.parse(localStorage.getItem('petCollection'));
+
 	// Creating JSON object for a pet
-		var pet = {					// was session
+		var petCollection = {					// was session
 		    'petDetails' : [],		// was screens
 		    'state' : true
 		};
@@ -154,11 +129,11 @@ function createPet() {
 
 		// Converting the JSON string with JSON.stringify 
 		// then saving with localStorage in the name of session
-		localStorage.setItem('pet', JSON.stringify(pet));
+		localStorage.setItem('petCollection', JSON.stringify(petCollection));
 
 		// Example of how to transform the String generated through 
 		// JSON.stringify and saved in localStorage in JSON object again
-		var restoredPet = JSON.parse(localStorage.getItem('pet'));
+		var restoredPet = JSON.parse(localStorage.getItem('petCollection'));
 
 		// Now restoredSession variable contains the object that was saved
 		// in localStorage
