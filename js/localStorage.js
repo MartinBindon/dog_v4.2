@@ -7,39 +7,25 @@ function initialize() {
 
 		var pets = JSON.parse(localStorage.getItem('petCollection'));
 
-		console.log('The full contents of pets in localStorage is: ' + pets);
+		console.log(pets);
+		for (var i in pets) {
+			console.log(pets[i]);  // this is returning each character of the string
+			//var allpet = JSON.parse(pets);  // getting an unexpected end error
+			//console.log(allpet.pet_name);
+		}
 
 
-		if(localStorage.petCollection != null)
+		if(pets != null)
 			{
 		// First element is always empty values, so i is set to 1 to prevent creating empty buttons.
-		for(i = 0; i < petCollection.length; i++) 
-			{
-				
-				// remove each element of the array - this contains all information about one pet.
-				//var currentPet = pets.slice(i);
-				//petName = pets.pet_name;
-				
-				
-				//console.log('The current pet should be:' + currentPet);
-				//console.log('The current pet name should be: ' + currentPet.pet_name);
-
-				console.log('Iteration: ' + i + ' Make this many buttons!');
+			for(var i in pets) 
+				{
+					console.log('Iteration: ' + i + ' Make this many buttons!');
 
 
 					$("#startPageButtonArea").append("<a data-role='button' data-theme = 'c' href=#informationSummary data-corners='true' data-shadow='true' data-wrapperels='span' class='ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c' onclick='getPet()'><span class='ui-btn-inner'><span class='ui-btn-text'>" + petName + "</span></span></a>");
 
 				}
-
-			  // "+buttonPetName+"
-				//document.getElementById('petButtonLabel').innerHTML = 'buttonPetName';
-
-				//<a data-role="button" href="#informationSummary">
-              	//	Dog 1
-          		//</a>
-          		//console.log('tbPets length - I should make this many buttons: ' + i);
-          		//console.log('');
-
 			}
 
 
@@ -71,17 +57,7 @@ function initialize() {
 // !!!!!!!!   it will need to be changed to reflect key pair values !!!!!!!!
 function clearPet() 
 	{
-		localStorage.removeItem("pet_name");
-		localStorage.removeItem("pet_photo");
-		localStorage.removeItem("pet_breed");
-		localStorage.removeItem("pet_age");
-		localStorage.removeItem("pet_wt");
-		localStorage.removeItem("vet_name");
-		localStorage.removeItem("vet_number");
-		localStorage.removeItem("vet_oohcontact");
-		localStorage.removeItem("ins_name");
-		localStorage.removeItem("ins_policyNo");
-		localStorage.removeItem("ins_contact");
+
 	}
 
 
@@ -102,16 +78,68 @@ function getPet()
 // Adds a pet to the JSON array, creates array if no array exists (first time it is clicked)
 function createPet() {
 
-	//collect any data already held in localStorage 
-	var pets = JSON.parse(localStorage.getItem('petCollection'));
+	
+	var petDetails = [];
+	var petCollection;
 
-	// Creating JSON object for a pet
+	//collect any data already held in localStorage 
+	petCollection = JSON.parse(localStorage.getItem('petCollection'));
+
+	// If there is no petCollection currently stored, create an empty array to put the first pet into
+	if(!petCollection)
+	{
+		petCollection = [];
+	}
+
+	for (var i in petCollection)
+	{
+		console.log(petCollection.pet_name);
+		var petDetails = [i];
+	}
+
+	// create Object to hold pet details and assign values based on text input from form
+
+	var petDetails = new Array();
+		petDetails.pet_name = document.getElementById("textinput1").value;
+		petDetails.pet_breed = document.getElementById("textinput2").value;
+		petDetails.vet_name = document.getElementById("textinput3").value;
+		petDetails.vet_contact = document.getElementById("textinput4").value;
+		petDetails.vet_oohcontact = document.getElementById("textinput5").value;
+		petDetails.ins_name = document.getElementById("textinput6").value;
+		petDetails.ins_contact = document.getElementById("textinput7").value;
+		petDetails.ins_policyNo = document.getElementById("textinput8").value;
+		petDetails.pet_age = document.getElementById("textinput9").value;
+		petDetails.pet_weight = document.getElementById("textinput10").value;
+		petDetails.tmt_flea = document.getElementById("textinput11").value;
+		petDetails.tmt_worm = document.getElementById("textinput12").value;
+		petDetails.tmt_jab = document.getElementById("textinput13").value;
+
+	// Convert the petDetails Object into JSON
+	//var pet = JSON.stringify(petDetails);
+		
+
+	// We collected the current JSON string previously and parsed it and called it 'pets'
+	// Now we push the new pet object into the pets array
+
+	petCollection.push("petDetails");
+
+	//Convert the pets array into JSON
+	//JSON.stringify(pets);
+
+	// Re stringify the pets array into JSON and save to local storage again.
+
+	localStorage.setItem("petCollection", JSON.stringify(petCollection));
+
+
+/*	// Creating JSON object for a pet
 		var petCollection = {					// was session
-		    'petDetails' : [],		// was screens
-		    'state' : true
+		    'petDetails' : []					// was screens
+		    //'state' : true
 		};
 
-		pet.petDetails.push({
+
+
+		petCollection.petDetails.push({  // removed .petDetails after petCollection
 			"pet_name": document.getElementById("textinput1").value,
 			"pet_breed" : document.getElementById("textinput2").value,
 			"vet_name" : document.getElementById("textinput3").value,
@@ -125,7 +153,8 @@ function createPet() {
 			"tmt_flea" : document.getElementById("textinput11").value,
 			"tmt_worm" : document.getElementById("textinput12").value,
 			"tmt_jab" : document.getElementById("textinput13").value,
-		});		
+		});
+	
 
 		// Converting the JSON string with JSON.stringify 
 		// then saving with localStorage in the name of session
@@ -138,7 +167,7 @@ function createPet() {
 		// Now restoredSession variable contains the object that was saved
 		// in localStorage
 		console.log(restoredPet.pet_name);
-
+*/	
 		// to add a new pet to the JSON string, the JSON string needs to be parsed, then the new array pushed in, then stringified again.
 		// Therefore:
 		// if JSON string exists
